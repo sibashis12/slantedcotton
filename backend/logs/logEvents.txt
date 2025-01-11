@@ -3,3 +3,6 @@
 20250111	19:17:17	81cf71ae-5b98-483a-97cc-d07bb0122cac	GET	/	undefined
 20250111	19:20:11	b93be758-8c80-4dae-a9c7-ba0aea97facc	GET	/signUp	undefined
 20250111	19:21:01	02c31ccc-96df-4166-b271-1bfbd2465a28	GET	/signUp	undefined
+20250111	20:23:23	ea2386cf-ade1-4d0e-8296-684344a360f8	GET	/signUp	undefined
+20250111	20:24:26	0dbd79a1-f36c-4408-8aac-23890c803ed9	GET	/signUp	undefined
+20250111	20:24:36	0ef09ecb-ac20-448a-b6a0-1ded516c85bc	GET	/login	undefined

@@ -19,7 +19,6 @@ const logoutController = async(req, res)=>{
         return res.sendStatus(204);
     }
     catch(err){
-        console.log(err);
         res.status(500).send(err.message);
     }
 }

@@ -16,7 +16,6 @@ const loginController= async(req, res)=>{
         return res.sendStatus(401); //Unauthorized
     }
     try{
-        const roles=Object.values(user.roles);
         const accessToken=jwt.sign({
             username: user.username,
         },
