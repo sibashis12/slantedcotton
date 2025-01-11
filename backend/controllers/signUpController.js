@@ -12,7 +12,7 @@ const signUpController= async(req, res)=>{
     }
     try{
         const hashedPwd=await bcrypt.hash(pwd, 15);
-        const result=await User.create({ username: username, password: hashedPwd });//automatically creates object id and version key
+        const result=await User.create({ username: username, password: hashedPwd, email: email });//automatically creates object id and version key
         res.status(201).json({ 'success': `New user ${username} created!` });
     }
     catch(err){

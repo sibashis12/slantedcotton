@@ -26,6 +26,7 @@ app.use(express.json());
 app.use('/signUp', require('./routes/signUp'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
+app.use('/refresh', require('./routes/refresh'));
 // protected routes
 app.use('/dummy', require('./middleware/verifyJWT'));
 app.use('/dummy', require('./routes/api/dummy'));

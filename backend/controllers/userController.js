@@ -8,6 +8,4 @@ const getAllUsers = async (req, res) => {
     res.json(users);
 }
 
-module.exports = {
-    getAllUsers
-}
+module.exports = getAllUsers

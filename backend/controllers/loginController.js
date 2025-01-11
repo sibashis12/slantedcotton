@@ -2,7 +2,7 @@ const User=require('../model/User');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 
-const loginController= async(req, res)=>{
+const loginController= async(req, res)=>{   
     const { username, pwd }=req.body;
     if(!username || !pwd){
         return res.status(400).json({ 'message' : "Username and password are required." });

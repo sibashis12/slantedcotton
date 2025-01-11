@@ -11,7 +11,6 @@ const logEvents=async (message)=>{
             await fsPromises.mkdir(path.join(__dirname, '..', 'logs'));
         }
         await fsPromises.appendFile(path.join(__dirname, '..', 'logs', 'logEvents.txt'), msg);
-        console.log(msg);
     }
     catch(err){
         console.error(err);
