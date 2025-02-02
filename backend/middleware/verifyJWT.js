@@ -1,30 +1,52 @@
-const jwt=require('jsonwebtoken');
-const User=require('../model/User');
+const jwt = require('jsonwebtoken');
+const User = require('../model/User');
 
-const verifyJWT = async(req, res, next) => {
-    const cookie=req.cookies;//checking if the user has the refresh token.
-    if(!cookie?.jwt){
-        return res.sendStatus(401);
+const verifyJWT = async (req, res, next) => {
+    /*
+    const cookie = req.cookies; 
+    if (!cookie?.refreshToken) { 
+        return res.status(401).json({ 'message': 'No refresh token cookie found' });
     }
-    const refreshToken=cookie.jwt;
-    const user=await User.findOne({refreshToken: refreshToken}).exec();//check which user has this refresh token
-    const authHeader=req.headers['authorization'];
-    if(!authHeader?.startsWith('Bearer')){//checking if correct token header
-        return res.sendStatus(401);
+    const refreshToken = cookie.refreshToken;
+    */
+
+    // Now, checking for the refresh token in the request body
+    // console.log(req.body);
+    const { accessToken, refreshToken } = req.body;
+    if(!refreshToken) {
+        return res.status(401).json({ 'message': 'No refresh token in request body' });
     }
-    if(!user){
-        res.clearCookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None'});
-        return res.sendStatus(403);
+    if(!accessToken){
+        return res.status(401).json({ 'message': 'No access token in request body' });
+    } 
+
+    const user = await User.findOne({ refreshToken: refreshToken }).exec(); // Check which user has this refresh token
+    // const authHeader = req.headers['authorization'];
+
+    // if (!authHeader?.startsWith('Bearer')) { // Check if the correct token header is provided
+    //     return res.status(401).json({ 'message': 'Invalid auth header' });
+    // }
+
+    if (!user) {
+        /*
+        res.clearCookie('refreshToken', { httpOnly: true }); // Set sameSite: 'None' secure: true in production
+        */
+        return res.status(403).json({ 'message': 'User not found' });
     }
-    const authToken=authHeader.split(' ')[1];//if the req has Bearer auth, it has info in form Bearer <token>
-    jwt.verify(authToken, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken)=>{
-        if(err || user.username!==decodedToken.username){
-            res.clearCookie('jwt', { httpOnly: true, sameSite: 'None'});
-            return res.sendStatus(403);//forbidden status code, denoting that it has been tampered with
+
+    // const authToken = authHeader.split(' ')[1]; // Extract token from Bearer <token>
+    const authToken=req.body.accessToken;
+    jwt.verify(authToken, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
+        if (err || user.username !== decodedToken.username) {
+            /*
+            res.clearCookie('refreshToken', { httpOnly: true }); // Set sameSite: 'None' secure: true in production
+            */
+            return res.status(403).json({ 'refresh': 'Try refreshing with refresh token' }); // Forbidden status code, token has been tampered with
         }
-        req.user=decodedToken.username;
-        next();
-    })
-}
 
-module.exports=verifyJWT;
+        req.user = decodedToken.username;
+        next();
+    });
+};
+
+module.exports = verifyJWT;
