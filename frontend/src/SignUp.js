@@ -32,7 +32,7 @@ const SignUp = () => {
             setError("Username, email, and password are required.");
             break;
           case 409:
-            setError("User already exists. Try logging in.");
+            setError(error.response.data.message);
             break;
           case 500:
             setError("Internal server error. Please try again later.");

@@ -9,6 +9,7 @@ const Dummy = () => {
   const navigate = useNavigate();
 
   const fetchData = async () => {
+
     const accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken"); // Get the refresh token from localStorage
 
@@ -80,8 +81,6 @@ const Dummy = () => {
   };
   const logout = async () => {
     setAbleBtn(false);
-  
-    const accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken");
   
     try {
@@ -104,7 +103,7 @@ const Dummy = () => {
   
   useEffect(() => {
     fetchData();
-  }, []);
+  });
 
   return (
     <div className="signup-container">
@@ -112,7 +111,6 @@ const Dummy = () => {
       <h2>Protected Data</h2>
       {data ? (
         <div className="data-container">
-          {/* If data is an object or array, render it properly */}
           {Array.isArray(data) ? (
             <ul>
               {data.map((item, index) => (

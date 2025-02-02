@@ -6,9 +6,13 @@ const signUpController= async(req, res)=>{
     if(!username || !pwd || !email){
         return res.status(400).json({ 'message' : "Username, email-id and password are required." });
     }
-    const duplicate = await User.findOne({username: username, email: email}).exec();  
+    const duplicate = await User.findOne({username: username}).exec();  
     if(duplicate){
         return res.status(409).json({ 'message' : 'User already exists.' }); //Conflict
+    }
+    const duplicateEmail = await User.findOne({email: email}).exec();  
+    if(duplicateEmail){
+        return res.status(409).json({ 'message' : 'Email already exists.' }); //Conflict
     }
     try{
         const hashedPwd=await bcrypt.hash(pwd, 15);
