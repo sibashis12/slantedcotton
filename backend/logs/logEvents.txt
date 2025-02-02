@@ -5023,3 +5023,9 @@
 20250202	19:17:31	037f2ad6-9d73-4c41-a34f-897dc04aa1b5	POST	/dummy	http://localhost:3000
 20250202	19:17:31	6687d60b-96a9-494f-ad66-0a8b8bdc9823	POST	/dummy	http://localhost:3000
 20250202	19:17:31	8e253905-2a02-4db3-abe1-fc0a5f3f1e89	POST	/dummy	http://localhost:3000
+20250202	19:23:10	cf91f0fe-fd20-47a1-a78f-68670877e872	OPTIONS	/signUp	http://localhost:3000
+20250202	19:23:10	a943f3c2-4cd5-4c6e-ba47-02d8c09bc7cf	POST	/signUp	http://localhost:3000
+20250202	19:23:13	cd639c05-070f-4945-a0c8-0eb2c529bdba	POST	/signUp	http://localhost:3000
+20250202	19:23:13	a03ea469-0e93-4823-a756-354f35874df0	POST	/signUp	http://localhost:3000
+20250202	19:23:14	c5d1199f-f917-45fb-a9ca-caef61ab7fa6	POST	/signUp	http://localhost:3000
+20250202	19:23:14	46b60e13-2918-42e4-9ac9-1018dc382a99	POST	/signUp	http://localhost:3000
