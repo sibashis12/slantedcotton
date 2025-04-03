@@ -48,16 +48,16 @@ const adminLoginController = async (req, res) => {
             path: '/' // set sameSite:'None' secure: true in production
         });
         */
-
+        // Store refreshToken in the admin object (if needed for future use)
+        admin.refreshToken = refreshToken;
+        await admin.save();
+        
         res.status(200).json({
             accessToken: accessToken,
             username: admin.username,
             refreshToken: refreshToken // Send refresh token as part of the response body
         });
 
-        // Store refreshToken in the admin object (if needed for future use)
-        admin.refreshToken = refreshToken;
-        await admin.save();
     } catch (err) {
         return res.status(500).json({ 'message': err.message });
     }

@@ -48,16 +48,15 @@ const loginController = async (req, res) => {
             path: '/' // set sameSite:'None' secure: true in production
         });
         */
+        // Store refreshToken in the user object (if needed for future use)
+        user.refreshToken = refreshToken;
+        await user.save();
 
         res.status(200).json({
             accessToken: accessToken,
             username: user.username,
             refreshToken: refreshToken // Send refresh token as part of the response body
         });
-
-        // Store refreshToken in the user object (if needed for future use)
-        user.refreshToken = refreshToken;
-        await user.save();
     } catch (err) {
         return res.status(500).json({ 'message': err.message });
     }
