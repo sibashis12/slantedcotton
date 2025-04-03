@@ -1,11 +1,17 @@
 const User=require('../model/User');
 
-const getAllUsers = async (req, res) => {
-    const users=await User.find();
-    if(!users){
-        res.status(200).json({message:'No users found.'})
+const getDetails = async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.user }).select('points matches');
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json({ points: user.points, matches: user.matches });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
     }
-    res.status(200).json({users:users});
 }
 
-module.exports = getAllUsers
+module.exports = getDetails;

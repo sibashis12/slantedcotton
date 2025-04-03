@@ -34,7 +34,7 @@ app.use('/admin/refresh', require('./routes/adminRefresh'));
 app.use('/admin', require('./middleware/verifyAdminJWT'));
 app.use('/admin', require('./routes/api/admin'));
 app.use('/user', require('./middleware/verifyJWT'));
-app.use('/user', require('./routes/api/dummy'));
+app.use('/user', require('./routes/api/user'));
 app.all("*", (request, response)=>{
     response.status(404).send("Page not found");
 });
