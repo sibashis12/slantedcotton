@@ -27,7 +27,7 @@ const Dummy = () => {
       
       // Make the API request
       let req = { accessToken: accessToken, refreshToken: refreshToken };
-      const response = await axios.post(process.env.BACKEND_URI+"/dummy", JSON.stringify(req), {
+      const response = await axios.post("https://slantedcotton-production.up.railway.app/dummy", JSON.stringify(req), {
         headers: { "Content-Type": "application/json" }
       });
 
@@ -43,7 +43,7 @@ const Dummy = () => {
         }
 
         try {
-          const refreshResponse = await axios.post(process.env.BACKEND_URI+'/refresh', { refreshToken }, { withCredentials: true });
+          const refreshResponse = await axios.post('https://slantedcotton-production.up.railway.app/refresh', { refreshToken }, { withCredentials: true });
 
           // Store the new access token and refresh token (if returned) in localStorage
           localStorage.setItem("accessToken", refreshResponse.data.accessToken);
@@ -52,7 +52,7 @@ const Dummy = () => {
           }
 
           // Retry the original request with the new access token
-          const retryResponse = await axios.get(process.env.BACKEND_URI+"/dummy", {
+          const retryResponse = await axios.get("https://slantedcotton-production.up.railway.app/dummy", {
             headers: {
               "Content-Type": "application/json",
             },
@@ -85,7 +85,7 @@ const Dummy = () => {
   
     try {
       await axios.post(
-        process.env.BACKEND_URI+"/logout",
+        "https://slantedcotton-production.up.railway.app/logout",
         { refreshToken },
         {
           headers: { "Content-Type": "application/json" },

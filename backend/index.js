@@ -27,9 +27,14 @@ app.use('/signUp', require('./routes/signUp'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/refresh', require('./routes/refresh'));
+app.use('/admin/login',  require('./routes/adminLogin'));
+app.use('/admin/logout', require('./routes/adminLogout'));
+app.use('/admin/refresh', require('./routes/adminRefresh'));
 // protected routes
-app.use('/dummy', require('./middleware/verifyJWT'));
-app.use('/dummy', require('./routes/api/dummy'));
+app.use('/admin', require('./middleware/verifyAdminJWT'));
+app.use('/admin', require('./routes/api/admin'));
+app.use('/user', require('./middleware/verifyJWT'));
+app.use('/user', require('./routes/api/dummy'));
 app.all("*", (request, response)=>{
     response.status(404).send("Page not found");
 });
