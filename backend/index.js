@@ -10,7 +10,7 @@ const credentials=require('./middleware/credentials');
 const connectDB=require('./config/dbConn');
 const cookieParser=require('cookie-parser');
 
-app.use(logger);
+// app.use(logger);
 
 connectDB();
 
