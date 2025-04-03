@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken');
 const Admin=require('../model/Admin');
 
-const adminRefreshTokenController= async(req, res, next)=>{
+const adminRefreshController= async(req, res, next)=>{
     // const cookies=req.cookies;
     // if(!cookies?.refreshToken){//optional chaining
     //     return res.status(401).send("No refresh token cookie found");//unauthorized status code, meaning that the admin is not authenticated
@@ -34,4 +34,4 @@ const adminRefreshTokenController= async(req, res, next)=>{
     )
 }
 
-module.exports=adminRefreshTokenController;
+module.exports=adminRefreshController;
