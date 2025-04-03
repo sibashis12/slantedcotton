@@ -15,7 +15,7 @@ const Login = () => {
     let form = { username: username, pwd: password };
     
     try {
-      const response = await axios.post('http://localhost:5000/login', JSON.stringify(form), {
+      const response = await axios.post(process.env.BACKEND_URI+'/login', JSON.stringify(form), {
         headers: { "Content-Type": "application/json" },
       });//for some reason get routes not working. maybe get routes do not have body stuff in request tags.
       

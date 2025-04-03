@@ -133,7 +133,7 @@ const SignUp = () => {
     let form = { username: username, pwd: password, email: email };
     
     try {
-      const response = await axios.post('http://localhost:5000/signUp', JSON.stringify(form), {
+      const response = await axios.post(process.env.BACKEND_URI+'/signUp', JSON.stringify(form), {
         headers: { "Content-Type": "application/json" },
       });
       
