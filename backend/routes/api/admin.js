@@ -5,8 +5,11 @@ const Question = require('../../model/Question'); // Import question model
 // GET: Fetch all questions
 router.get('/questions', async (req, res) => {
     try {
-        const questions = await Question.find();
-        res.json(questions);
+        const questions=await Question.find();
+        if(!questions){
+            res.status(200).json({message:'No questions found.'})
+        }
+        res.status(200).json({questions:questions});
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
