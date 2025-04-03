@@ -16,10 +16,10 @@ router.get('/questions', async (req, res) => {
 router.post('/questions', async (req, res) => {
     const { prompt, options, correct } = req.body;
 
-    if (!prompt || options.length !== 4 || correct < 0 || correct > 3) {
+    if (!prompt || !Array.isArray(options) || options.length !== 4 || correct < 0 || correct > 3) {
         return res.status(400).json({ message: "Invalid question data" });
     }
-
+    
     try {
         const newQuestion = new Question({ prompt, options, correct });
         await newQuestion.save();
@@ -32,7 +32,22 @@ router.post('/questions', async (req, res) => {
 // PUT: Update a question
 router.put('/questions/:id', async (req, res) => {
     try {
-        const updatedQuestion = await Question.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const { prompt, options, correct } = req.body;
+
+        if (!prompt?.trim() || !Array.isArray(options) || options.length !== 4 || correct < 0 || correct > 3) {
+            return res.status(400).json({ message: "Invalid question update data" });
+        }
+
+        const updatedQuestion = await Question.findByIdAndUpdate(
+            req.params.id,
+            { prompt, options, correct },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedQuestion) {
+            return res.status(404).json({ message: "Question not found" });
+        }
+
         res.json(updatedQuestion);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -42,7 +57,10 @@ router.put('/questions/:id', async (req, res) => {
 // DELETE: Remove a question
 router.delete('/questions/:id', async (req, res) => {
     try {
-        await Question.findByIdAndDelete(req.params.id);
+        const deletedQuestion = await Question.findByIdAndDelete(req.params.id);
+        if (!deletedQuestion) {
+            return res.status(404).json({ message: "Question not found" });
+        }
         res.json({ message: "Question deleted" });
     } catch (err) {
         res.status(500).json({ message: err.message });
