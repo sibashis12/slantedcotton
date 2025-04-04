@@ -2,13 +2,13 @@ require('dotenv').config();
 const mongoose=require('mongoose');
 const express=require('express');
 const app=express();
-const PORT=process.env.PORT || 6000;
+const PORT=process.env.PORT || 5000;
 const cors=require('cors');
 const {logger}=require('./middleware/logEvents');
 const corsOptions=require('./config/corsOptions');
 const credentials=require('./middleware/credentials');
 const connectDB=require('./config/dbConn');
-const cookieParser=require('cookie-parser');
+// const cookieParser=require('cookie-parser');
 
 // app.use(logger);
 
@@ -18,7 +18,7 @@ app.use(credentials);//sets access control headers
 
 app.use(cors(corsOptions));//contains whitelisted sites
 
-app.use(cookieParser());//middleware to parse cookies
+// app.use(cookieParser());//middleware to parse cookies
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
@@ -27,9 +27,9 @@ app.use('/signUp', require('./routes/signUp'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/refresh', require('./routes/refresh'));
-app.use('/admin/login',  require('./routes/adminLogin'));
-app.use('/admin/logout', require('./routes/adminLogout'));
-app.use('/admin/refresh', require('./routes/adminRefresh'));
+app.use('/adminLogin',  require('./routes/adminLogin'));
+app.use('/adminLogout', require('./routes/adminLogout'));
+app.use('/adminRefresh', require('./routes/adminRefresh'));
 // protected routes
 app.use('/admin', require('./middleware/verifyAdminJWT'));
 app.use('/admin', require('./routes/api/admin'));

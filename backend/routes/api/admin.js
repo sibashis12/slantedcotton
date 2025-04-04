@@ -3,7 +3,7 @@ const router = express.Router();
 const Question = require('../../model/Question'); // Import question model
 
 // GET: Fetch all questions
-router.get('/questions', async (req, res) => {
+router.post('/getQuestions', async (req, res) => {
     try {
         const questions=await Question.find();
         if(!questions){
@@ -16,7 +16,7 @@ router.get('/questions', async (req, res) => {
 });
 
 // POST: Add a new question
-router.post('/questions', async (req, res) => {
+router.post('/question', async (req, res) => {
     const { prompt, options, correct } = req.body;
 
     if (!prompt || !Array.isArray(options) || options.length !== 4 || correct < 0 || correct > 3) {
