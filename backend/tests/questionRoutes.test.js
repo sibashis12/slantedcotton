@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../server"); // Import your Express app
+const app = require("../index"); 
 const mongoose = require("mongoose");
 
 describe("Question API Tests", () => {
