@@ -16,7 +16,7 @@ router.post('/getQuestions', async (req, res) => {
 });
 
 // POST: Add a new question
-router.post('/question', async (req, res) => {
+router.post('/questions', async (req, res) => {
     const { prompt, options, correct } = req.body;
 
     if (!prompt || !Array.isArray(options) || options.length !== 4 || correct < 0 || correct > 3) {
